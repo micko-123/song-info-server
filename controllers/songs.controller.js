@@ -1,15 +1,15 @@
-const getSongs = (req, res) => {
-  res.end("get all songs");
-};
-const createSong = (req, res) => {
-  res.end("create song");
-};
-const updateSong = (req, res) => {
-  res.end("update song");
-};
-const deleteSong = (req, res) => {
-  res.end("delete songs");
-};
+const { deleteOne, updateOne, getAll, createOne } = require("../utils/crud");
+
+const Song = require("../models/Song");
+
+// - CRUD controllers- //
+const getSongs = getAll(Song);
+
+const createSong = createOne(Song);
+
+const updateSong = updateOne(Song);
+
+const deleteSong = deleteOne(Song);
 
 module.exports = {
   getSongs,
