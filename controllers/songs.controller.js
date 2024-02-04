@@ -1,5 +1,11 @@
 const asyncHandler = require("express-async-handler");
-const { deleteOne, updateOne, getAll, getOne, createOne } = require("./crud");
+const {
+  deleteOne,
+  updateOne,
+  getAll,
+  getOne,
+  createOne,
+} = require("../utils/crud");
 
 const Song = require("../models/Song");
 
