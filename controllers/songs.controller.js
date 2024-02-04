@@ -9,7 +9,7 @@ const {
 
 const Song = require("../models/Song");
 
-// -- CRUD controllers-- 
+// -- CRUD controllers--
 const getSongs = getAll(Song);
 
 const createSong = createOne(Song);
@@ -17,7 +17,6 @@ const createSong = createOne(Song);
 const updateSong = updateOne(Song);
 
 const deleteSong = deleteOne(Song);
-
 
 // -- Stats --
 
