@@ -4,11 +4,13 @@ const songSchema = new mongoose.Schema({
   title: {
     type: String,
     maxLength: 255,
+
     trim: true,
   },
   artist: {
     type: String,
     maxLength: 50,
+    minLength: 2,
     trim: true,
   },
   album: {
@@ -19,6 +21,7 @@ const songSchema = new mongoose.Schema({
   genre: {
     type: String,
     maxLength: 50,
+    minLength: 3,
     trim: true,
   },
 });
