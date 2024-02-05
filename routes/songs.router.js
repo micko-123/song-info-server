@@ -18,7 +18,7 @@ router.route("/:id").put(updateSong).delete(deleteSong);
 
 router.get("/totalStats", getTotalStats);
 router.get("/genreStats", getGenreStats);
-router.get("artistStats", getArtistStats);
-router.get("albumStats", getAlbumStats);
+router.get("/artistStats", getArtistStats);
+router.get("/albumStats", getAlbumStats);
 
 module.exports = router;

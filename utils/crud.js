@@ -78,7 +78,6 @@ const getAll = (Model) =>
       .paginate();
 
     const doc = await features.query;
-    console.log(doc);
 
     res.status(200).json({
       status: "success",

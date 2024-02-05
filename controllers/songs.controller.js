@@ -42,7 +42,10 @@ const getTotalStats = asyncHandler(async (req, res) => {
       },
     },
   ]);
-  res.json(totalStats[0]);
+  res.json({
+    status: "success",
+    data: totalStats,
+  });
 });
 
 // # of songs in every genre
@@ -55,7 +58,10 @@ const getGenreStats = asyncHandler(async (req, res) => {
       },
     },
   ]);
-  res.json(genreStats);
+  res.json({
+    status: "success",
+    data: genreStats,
+  });
 });
 
 // # of songs & albums each artist has
@@ -76,7 +82,11 @@ const getArtistStats = asyncHandler(async (req, res) => {
       },
     },
   ]);
-  res.json(artistStats);
+
+  res.json({
+    status: "success",
+    data: artistStats,
+  });
 });
 
 // # songs in each album
@@ -89,7 +99,10 @@ const getAlbumStats = asyncHandler(async (req, res) => {
       },
     },
   ]);
-  res.json(albumStats);
+  res.json({
+    status: "success",
+    data: albumStats,
+  });
 });
 
 module.exports = {
