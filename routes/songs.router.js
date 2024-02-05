@@ -10,6 +10,7 @@ const {
   getGenreStats,
   getArtistStats,
   getAlbumStats,
+  getOverAllStats,
 } = require("../controllers/songs.controller");
 
 router.route("/").get(getSongs).post(createSong);
@@ -20,5 +21,8 @@ router.get("/totalStats", getTotalStats);
 router.get("/genreStats", getGenreStats);
 router.get("/artistStats", getArtistStats);
 router.get("/albumStats", getAlbumStats);
+
+
+router.get('/overAllStats', getOverAllStats)
 
 module.exports = router;

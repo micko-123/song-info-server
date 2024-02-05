@@ -42,10 +42,7 @@ const getTotalStats = asyncHandler(async (req, res) => {
       },
     },
   ]);
-  res.json({
-    status: "success",
-    data: totalStats,
-  });
+  res.json({totalStats: totalStats[0]});
 });
 
 // # of songs in every genre
@@ -58,10 +55,7 @@ const getGenreStats = asyncHandler(async (req, res) => {
       },
     },
   ]);
-  res.json({
-    status: "success",
-    data: genreStats,
-  });
+  res.json(genreStats);
 });
 
 // # of songs & albums each artist has
@@ -83,10 +77,7 @@ const getArtistStats = asyncHandler(async (req, res) => {
     },
   ]);
 
-  res.json({
-    status: "success",
-    data: artistStats,
-  });
+  res.json(artistStats);
 });
 
 // # songs in each album
@@ -99,10 +90,71 @@ const getAlbumStats = asyncHandler(async (req, res) => {
       },
     },
   ]);
-  res.json({
-    status: "success",
-    data: albumStats,
-  });
+  res.json(albumStats);
+});
+
+const getOverAllStats = asyncHandler(async (req, res) => {
+
+  const totalStats = await Song.aggregate([
+    {
+      $group: {
+        _id: null,
+        totalSongs: { $sum: 1 },
+        totalArtists: { $addToSet: "$artist" },
+        totalAlbums: { $addToSet: "$album" },
+        totalGenres: { $addToSet: "$genre" },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        totalSongs: 1,
+        totalArtists: { $size: "$totalArtists" },
+        totalAlbums: { $size: "$totalAlbums" },
+        totalGenres: { $size: "$totalGenres" },
+      },
+    },
+  ]);
+
+
+  const genreStats = await Song.aggregate([
+    {
+      $group: {
+        _id: "$genre",
+        count: { $sum: 1 },
+      },
+    },
+  ]);
+
+
+  const artistStats = await Song.aggregate([
+    {
+      $group: {
+        _id: "$artist",
+        totalSongs: { $sum: 1 },
+        totalAlbums: { $addToSet: "$album" },
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        totalSongs: 1,
+        totalAlbums: { $size: "$totalAlbums" },
+      },
+    },
+  ]);
+
+
+  const albumStats = await Song.aggregate([
+    {
+      $group: {
+        _id: "$album",
+        count: { $sum: 1 },
+      },
+    },
+  ]);
+
+  res.json({totalStats: totalStats[0], genreStats, artistStats, albumStats});
 });
 
 module.exports = {
@@ -114,4 +166,5 @@ module.exports = {
   getGenreStats,
   getArtistStats,
   getAlbumStats,
+  getOverAllStats,
 };
