@@ -13,4 +13,8 @@ app.use(morgan("dev"));
 // routes
 app.use("/api/v1/songs", router);
 
+app.use("/", (req, res) => {
+  res.redirect("/api/v1/songs");
+});
+
 module.exports = app;
