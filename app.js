@@ -14,7 +14,14 @@ app.use(morgan("dev"));
 app.use("/api/v1/songs", router);
 
 app.use("/", (req, res) => {
-  res.redirect("/api/v1/songs");
+  res.send(
+    "<body> <h2>Go to: /api/v1/songs  </h2> <br /> <h2> or Go to: '/download' to download postman collection </h2> </body>"
+  );
+});
+
+app.get("/download", function (req, res) {
+  const file = `${__dirname}/upload-folder/Song-info-management.postman_collection.json`;
+  res.download(file); // Set disposition and send it.
 });
 
 module.exports = app;
